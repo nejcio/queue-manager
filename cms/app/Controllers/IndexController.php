@@ -3,10 +3,9 @@
 namespace app\Controllers;
 
 use Bootstrap\App;
-use App\Models\HLR;
+use App\Models\QueueManager;
 use App\View\View;
 use App\Validators\CSRF;
-use App\Validators\MSISDN;
 
 class IndexController
 {
@@ -53,7 +52,8 @@ class IndexController
 
         if ($csrfCheck):
 
-            else :
+
+        else :
 
             echo json_encode(['success' => 'failed', 'data'=> ['ERROR' => 'CSRF failed!']]);
 

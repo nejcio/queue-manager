@@ -457,7 +457,7 @@ body{
   border: 1px solid #ccc;
   text-transform: uppercase;
   width: 96%;
-  margin-bottom: 1px;
+  margin-bottom: 10px;
 }
 .form button {
   display: block;

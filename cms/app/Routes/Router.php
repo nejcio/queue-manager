@@ -50,11 +50,9 @@ class Router implements RouterInterface
         $method = $controller[1];
 
         $controllerObject = new $objPath($this->app);
-            // echo '<pre>';
-            // var_dump($method);
-            // echo '</pre>';
-            // exit();
-            $controllerObject->$method(); else:
+        $controllerObject->$method();
+
+        else:
 
             die('404 Page not found, sorry');
 

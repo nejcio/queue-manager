@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ReverseText
+class ReverseText extends Model
 {
     protected $table = 'queues';
     protected $type = '4';

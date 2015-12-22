@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Algebra
+class Algebra extends Model
 {
     protected $table = 'queues';
     protected $type = '1';

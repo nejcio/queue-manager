@@ -4,7 +4,7 @@ namespace App\Workers;
 
 use App\Models\Bcrypt;
 
-class BcryptWorker
+class BcryptWorker3
 {
     /**
      * Input Bcrypter

@@ -4,7 +4,7 @@ namespace App\Workers;
 
 use App\Models\ReverseText;
 
-class ReverseTextWorker
+class ReverseTextWorker3
  {
     /**
      * Text Reverser

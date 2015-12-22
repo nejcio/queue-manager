@@ -4,7 +4,7 @@ namespace App\Workers;
 
 use App\Models\Fabonacci;
 
-class FabonacciWorker
+class FabonacciWorker2
 {
     /**
      * Fibonacci Sequence Resolver

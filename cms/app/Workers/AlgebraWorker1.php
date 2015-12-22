@@ -2,17 +2,13 @@
 
 namespace App\Workers;
 
-use App\Models\Algebra;
-
-class AlgebraWorker1
+class AlgebraWorker1 extends AlgebraWorker
 {
-    /**
-     *  Arithmetic Resolver
-     * @param  string $input Input
-     * @return string      Result
-     */
-    public static function arithmeticResolver($input)
+
+    public function resolve($input, $id, $table)
     {
-        return strrev($input);
+        $dbconn = $this->DBconnect()['dbconn'];
+        $table = $this->DBconnect()['dbtable'];
+        $result = $this->arithmeticResolver($input);
     }
 }

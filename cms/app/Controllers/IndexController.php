@@ -3,9 +3,10 @@
 namespace app\Controllers;
 
 use Bootstrap\App;
-use App\Models\QueueManager;
+use App\Queue\QueueManager;
 use App\View\View;
 use App\Validators\CSRF;
+use App\Workers\Worker;
 
 class IndexController
 {
@@ -52,13 +53,48 @@ class IndexController
 
         if ($csrfCheck):
 
+            $servername = $this->app->getAppVariable('servername');
+            $dbname = $this->app->getAppVariable('dbname');
+            $username = $this->app->getAppVariable('username');
+            $password = $this->app->getAppVariable('password');
 
-        else :
+            $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            echo json_encode(['success' => 'failed', 'data'=> ['ERROR' => 'CSRF failed!']]);
+            unset($_POST['csrf']);
+            $request = $_POST;
 
+            if ($request):
+                $queueManager = new QueueManager();
+                $queueManager->addToQueue($request, $dbconn);
+            endif;
+
+            $dbconn = null;
+            echo json_encode(['success' => 'success', 'data'=> ['msg' => 'Request added to queue!']]);
             return;
-
+        else :
+            echo json_encode(['success' => 'failed', 'data'=> ['ERROR' => 'CSRF failed!']]);
+            return;
         endif;
+    }
+
+    public function test()
+    {
+        $servername = $this->app->getAppVariable('servername');
+        $dbname = $this->app->getAppVariable('dbname');
+        $username = $this->app->getAppVariable('username');
+        $password = $this->app->getAppVariable('password');
+        $tableName = $this->app->getAppVariable('dbtable');
+        $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        $worker = new Worker;
+        $workLoad = $worker->getFromQueue($dbconn, $tableName);
+        $worker->work($workLoad, $dbconn, $tableName);
+
+
+        $dbconn = null;
+        print_r('$worker');
+        die("worker");
     }
 }

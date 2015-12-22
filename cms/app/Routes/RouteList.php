@@ -22,6 +22,7 @@ class RouteList
     {
         return [
             ["uri" => "/", "action" => "get" ,"uses" => "IndexController@index"],
+            ["uri" => "/queue", "action" => "get" ,"uses" => "IndexController@test"],
             ["uri" => "/", "action" => "post" ,"uses" => "IndexController@handle"],
         ];
     }

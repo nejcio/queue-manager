@@ -1,9 +1,10 @@
 <?php
 
-namespace app\Controllers;
+namespace App\Interfaces;
 
-interface QueueManagerInterface {
+interface QueueInterface
+{
 
-    public static function DispatchJob($request, $type);
+    public static function addToQueue($data);
 
 }

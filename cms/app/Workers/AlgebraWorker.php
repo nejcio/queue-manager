@@ -2,14 +2,16 @@
 
 namespace App\Workers;
 
-class AlgebraWorker2
+use App\Models\Algebra;
+
+class AlgebraWorker extends Worker
 {
     /**
      *  Arithmetic Resolver
      * @param  string $input Input
      * @return string      Result
      */
-    public static function arithmeticResolver($input)
+    public function arithmeticResolver($input)
     {
         return strrev($input);
     }

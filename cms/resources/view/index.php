@@ -4,14 +4,14 @@ session_start();
 $_SESSION['csrf'] =  $csrf_token;
 ?>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Homework nr.2</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Homework nr.2</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
      <!-- CONTENT -->
         <section id="content">
             <div class="result">
@@ -33,8 +33,5 @@ $_SESSION['csrf'] =  $csrf_token;
                 </form>
             </div>
         </section>
-    <!-- JAVASCTIPT -->
-    <script src="/js/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <script src="/js/app.js" type="text/javascript"></script>
-</body>
+    </body>
 </html>

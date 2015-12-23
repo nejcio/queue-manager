@@ -50,10 +50,11 @@ class IndexController
             $dbname = $this->app->getAppVariable('dbname');
             $username = $this->app->getAppVariable('username');
             $password = $this->app->getAppVariable('password');
+            $tableName = $this->app->getAppVariable('dbtable');
 
             $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            $sth = $dbconn->prepare("SELECT * FROM $table WHERE done = 1 ORDER BY created_at");
+            $sth = $dbconn->prepare("SELECT * FROM $tableName WHERE done = 1 ORDER BY created_at");
             try {
                 $sth->execute();
                 $fetchAllWorkers = $sth->fetchAll();
@@ -63,7 +64,7 @@ class IndexController
 
         $data["results"] = $fetchAllWorkers;
 
-       //return View::render($this->app->getAppVariable('VIEW_PATH') . 'show.php', $data);
+       return View::render($this->app->getAppVariable('VIEW_PATH') . 'show.php', $data);
     }
 
     /**
@@ -125,6 +126,6 @@ class IndexController
 
         $dbconn = null;
 
-        print_t('Done!');
+        print_r('Done!');
     }
 }

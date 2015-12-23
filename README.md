@@ -2,8 +2,7 @@
 
 ##Requirements
 
-#Using our out VM:
-
+###Using our out VM:
 1. Git
 2. Vagrant and Virtualbox
 3. Ansible

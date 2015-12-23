@@ -54,3 +54,5 @@
         service: name=apache2 state=reloaded
       - name: mysql migrate
         shell: ( cd /vagrant/cms/mysql/ && php migration.php)
+      - name: task cron job
+        cron: minute="*/1" name="task cron job" job="/usr/bin/php /vagrant/cms/cron/cron.php"

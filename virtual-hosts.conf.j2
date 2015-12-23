@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /vagrant/cms/public
+  <Directory /vagrant/cms/public>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+  </Directory>
+</VirtualHost>

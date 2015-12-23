@@ -18,16 +18,15 @@
           - php5-fpm
           - php5-json
           - php5-mcrypt
-          -mysql-server
-          -libapache2-mod-auth-mysql
+          - mysql-server
+          - libapache2-mod-auth-mysql
           - php5-mysql
       - name: install git
         apt: name=git state=present
       - name: install Composer
-      - name: composer create-project
-        composer: command=create-project working_dir=/vagrant/cms optimize_autoloader=no
-        sudo: yes
-        when: changed
+        shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+        args:
+          creates: /usr/local/bin/composer
       - name: composer update
         shell: ( cd /vagrant/cms/ && composer update)
         sudo: yes
@@ -46,7 +45,6 @@
           state=link
       - name: Create database user
         mysql_user: user=root password='' priv=*.*:ALL state=present
-
       - name: Create database
         mysql_db: db=queues state=present
       - name: mod

@@ -4,32 +4,15 @@ return [
 
      /*
      |--------------------------------------------------------------------------
-     | API username for hlrlookups.com
+     | Database
      |--------------------------------------------------------------------------
      |
-     |  Username for hlrlookups.com
+     |  DB Credentails
      |
      */
-
-     'API_USERNAME' => 'krexro',
-
-     /*
-     |--------------------------------------------------------------------------
-     | API password for hlrlookups.com
-     |--------------------------------------------------------------------------
-     |
-     | Password for hlrlookups.com
-     |
-     */
-     'API_PASS' => '46824HLRgesLo',
-
-     /*
-     |--------------------------------------------------------------------------
-     | Our Application Auth API key
-     |--------------------------------------------------------------------------
-     |
-     | Our Application api key
-     |
-     */
-     'API_KEY' => 'ApiTheKeY'
+     'servername' => "localhost",
+     'username' => "root",
+     'password' => "",
+     'dbname' => "root",
+     'dbtable' => "queues",
  ];

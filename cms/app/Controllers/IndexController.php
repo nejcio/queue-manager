@@ -41,6 +41,32 @@ class IndexController
     }
 
     /**
+     * Show All results
+     * view     returns the show view
+     */
+    public function show()
+    {
+            $servername = $this->app->getAppVariable('servername');
+            $dbname = $this->app->getAppVariable('dbname');
+            $username = $this->app->getAppVariable('username');
+            $password = $this->app->getAppVariable('password');
+
+            $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $sth = $dbconn->prepare("SELECT * FROM $table WHERE done = 1 ORDER BY created_at");
+            try {
+                $sth->execute();
+                $fetchAllWorkers = $sth->fetchAll();
+            } catch (\Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+
+        $data["results"] = $fetchAllWorkers;
+
+       //return View::render($this->app->getAppVariable('VIEW_PATH') . 'show.php', $data);
+    }
+
+    /**
      * This method handles the post request
      * @return json    returns the json response
      */
@@ -78,13 +104,14 @@ class IndexController
         endif;
     }
 
-    public function test()
+    public function resolveAllQueues()
     {
         $servername = $this->app->getAppVariable('servername');
         $dbname = $this->app->getAppVariable('dbname');
         $username = $this->app->getAppVariable('username');
         $password = $this->app->getAppVariable('password');
         $tableName = $this->app->getAppVariable('dbtable');
+
         $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
@@ -92,9 +119,8 @@ class IndexController
         $workLoad = $worker->getFromQueue($dbconn, $tableName);
         $worker->work($workLoad, $dbconn, $tableName);
 
-
         $dbconn = null;
-        print_r('$worker');
+
         die("worker");
     }
 }

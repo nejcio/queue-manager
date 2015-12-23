@@ -2,15 +2,31 @@
 
 namespace App\Workers;
 
-class AlgebraWorker2
+class AlgebraWorker2 extends AlgebraWorker
 {
     /**
-     *  Arithmetic Resolver
-     * @param  string $input Input
-     * @return string      Result
+     * Bcrypts the string and to DB
+      * @param  string $item      item from DB
+     * @param  string $tableName table name
+     * @param  obj $dbconn       PDO object
      */
-    public static function arithmeticResolver($input)
+    public function resolve($item, $tableName, $dbconn)
     {
-        return strrev($input);
+        $id = $item["id"];
+        if (is_string($item["data"])):
+            $result = $this->resolveIt($item['data']);
+            try {
+                $sth = $dbconn->prepare("UPDATE $tableName SET result = :result, done=:done WHERE id =:id ");
+                $sth->bindParam(':result', $result2);
+                $sth->bindParam(':done', $done);
+                $sth->bindParam(':id', $itemid);
+                $result2 =$result;
+                $done = 1;
+                $itemid = $id;
+                $sth->execute();
+            } catch (\Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        endif;
     }
 }

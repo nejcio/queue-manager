@@ -24,11 +24,8 @@ class App
      */
     public function __construct($configuration, $app)
     {
-
         $this->configuration = $configuration;
-
         $this->app = $app;
-
     }
 
     /**
@@ -50,7 +47,6 @@ class App
     public function getAppVariable($variable)
     {
         $variables = array_merge($this->configuration, $this->app);
-
         (array_key_exists($variable, $variables)) ? $desiredVariable = $variables[$variable] : $desiredVariable = null;
 
         return $desiredVariable;

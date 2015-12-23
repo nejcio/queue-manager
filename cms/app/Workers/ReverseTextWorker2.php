@@ -2,17 +2,31 @@
 
 namespace App\Workers;
 
-use App\Models\ReverseText;
-
-class ReverseTextWorker2
+class ReverseTextWorker2 extends ReverseTextWorker
  {
     /**
-     * Text Reverser
-     * @param  string $input Input - string
-     * @return string      Reverse string
+     *  Reverses the string and saves to DB
+     * @param  string $item      item from DB
+     * @param  string $tableName table name
+     * @param  obj $dbconn       PDO object
      */
-    public static function reverseIt($input)
+    public function resolve($item, $tableName, $dbconn)
     {
-        return strrev($input);
+        $id = $item["id"];
+        if (is_string($item["data"])):
+            $result = $this->reverseIt($item['data']);
+            try {
+                $sth = $dbconn->prepare("UPDATE $tableName SET result = :result, done=:done WHERE id =:id ");
+                $sth->bindParam(':result', $result2);
+                $sth->bindParam(':done', $done);
+                $sth->bindParam(':id', $itemid);
+                $result2 = $result;
+                $done = 1;
+                $itemid = $id;
+                $sth->execute();
+            } catch (\Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        endif;
     }
 }

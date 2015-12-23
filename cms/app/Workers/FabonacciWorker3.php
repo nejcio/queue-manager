@@ -2,23 +2,33 @@
 
 namespace App\Workers;
 
-use App\Models\Fabonacci;
-
-class FabonacciWorker3
+class FabonacciWorker3 extends FibonacciWorker
 {
     /**
-     * Fibonacci Sequence Resolver
-     * @param  int $input input number
-     * @return array      Fibonacci Sequence
+     * Resolves the function and saves to DB
+     * @param  string $item      item from DB
+     * @param  string $tableName table name
+     * @param  obj $dbconn       PDO object
      */
-    public static function reslove($input)
+    public function resolve($item, $tableName, $dbconn)
     {
-        $int = (int)$input;
-        $fibArray = array(0, 1);
-        for ( $i=2; $i<=$int; ++$i ):
-            $fibArray[$i] = $fibArray[$i-1] + $fibArray[$i-2];
-        endfor;
-
-        return $fibArray[$pos];
+        $id = $item["id"];
+        if (is_string($item["data"])):
+            $result = $this->reslove($item['data']);
+            try {
+                $sth = $dbconn->prepare("UPDATE $tableName SET result = :result, done=:done, extra=:extra WHERE id =:id ");
+                $sth->bindParam(':result', $result2);
+                $sth->bindParam(':done', $done);
+                $sth->bindParam(':id', $itemid);
+                $sth->bindParam(':extra', $extra);
+                $result2 = (string)$result["result"];
+                $extra = $result["fulltrace"];
+                $done = 1;
+                $itemid = $id;
+                $sth->execute();
+            } catch (\Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        endif;
     }
 }

@@ -11,8 +11,9 @@ class AlgebraWorker extends Worker
      * @param  string $input Input
      * @return string      Result
      */
-    public function arithmeticResolver($input)
+    public function resolveIt($input)
     {
-        return strrev($input);
+        eval( '$result = (' . $input . ');' );
+        return $result;
     }
 }

@@ -30,39 +30,37 @@ class Worker
     public function work($workLoad, $dbconn, $table)
     {
         $algebra = new Algebra;
-        $one = $algebra->getTypeOfFunctionInt();
+        $algebraType = $algebra->getTypeOfFunctionInt();
         $bcrypt = new Bcrypt;
-        $two = $bcrypt->getTypeOfFunctionInt();
-        $fibonacii = new Fibonacci;
-        $three = $fibonacii->getTypeOfFunctionInt();
+        $bcryptType = $bcrypt->getTypeOfFunctionInt();
+        $fibonacci = new Fibonacci;
+        $fibonacciType = $fibonacci->getTypeOfFunctionInt();
         $reversetext = new ReverseText;
-        $four = $reversetext->getTypeOfFunctionInt();
+        $reversetextType = $reversetext->getTypeOfFunctionInt();
 
         foreach ($workLoad as $item):
-            if($item['type'] == $one):
-                $class = "\\App\\Workers\\AlgebraWorker". $item['worker'];
-                $obj = new $class ;
-                $obj->resolve($item['data'], $id, $table);
-            endif;
-            if($item['type'] == $two):
-                $class = "\\App\\Workers\\BcryptWorker". $item['worker'];
-                $obj = new $class;
-                $obj->resolve($item['data'], $id, $table);
-            endif;
-            if($item['type'] == $three):
-                $class = "\\App\\Workers\\FibonacciWorker". $item['worker'];
-                $obj = new $class;
-                $obj->resolve($item['data'], $id, $table);
-            endif;
-            if($item['type'] == $four):
-                $class = "\\App\\Workers\\ReverseTextWorker". $item['worker'];
-                $obj = new $class;
-                $obj->resolve($item['data'], $id, $table);
-            endif;
+            switch ($item['type']):
+                case $algebraType:
+                    $class = "\\App\\Workers\\AlgebraWorker". $item['worker'];
+                    $obj = new $class ;
+                    $obj->resolve($item, $table, $dbconn);
+                    break;
+                case $bcryptType:
+                    $class = "\\App\\Workers\\BcryptWorker". $item['worker'];
+                    $obj = new $class;
+                    $obj->resolve($item, $table, $dbconn);
+                    break;
+                case $fibonacciType:
+                    $class = "\\App\\Workers\\FabonacciWorker". $item['worker'];
+                    $obj = new $class;
+                    $obj->resolve($item, $table, $dbconn);
+                    break;
+                case $reversetextType:
+                    $class = "\\App\\Workers\\ReverseTextWorker". $item['worker'];
+                    $obj = new $class;
+                    $obj->resolve($item, $table, $dbconn);
+                    break;
+            endswitch;
         endforeach;
-
-        // $sth = $dbconn->prepare("INSERT INTO $tableName(data, worker, type)
-        // VALUES(:input, :worker, :type)");
-        // $sth->execute(['input' => '11', 'worker' => '1', 'type' => 1]);
     }
 }

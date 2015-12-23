@@ -433,6 +433,10 @@ body{
   background: #eee;
   color: #333;
 }
+
+/**
+ * Page Content
+ */
 #content {
 
     position: absolute;
@@ -445,6 +449,10 @@ body{
     width: 50%;
     height: auto;
 }
+
+/**
+ * Form
+ */
 .form label {
   display: block;
   margin-bottom: 0.5em;

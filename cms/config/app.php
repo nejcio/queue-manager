@@ -1,7 +1,6 @@
 <?php
 
 return [
-
      /*
      |--------------------------------------------------------------------------
      | Application Template Folder
@@ -10,6 +9,5 @@ return [
      | Path to templates
      |
      */
-
      'VIEW_PATH'       => __DIR__.'/../resources/view/',
  ];

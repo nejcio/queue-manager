@@ -42,7 +42,7 @@ class IndexController
 
     /**
      * Show All results
-     * view     returns the show view
+     * @return view     returns the show view
      */
     public function show()
     {
@@ -90,7 +90,7 @@ class IndexController
 
             unset($_POST['csrf']);
             $request = $_POST;
-
+            //Adding to Queue
             if ($request):
                 $queueManager = new QueueManager();
                 $queueManager->addToQueue($request, $dbconn);
@@ -120,7 +120,7 @@ class IndexController
 
         $dbconn = new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $dbconn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
+        //Resolving the queue
         $worker = new Worker;
         $workLoad = $worker->getFromQueue($dbconn, $tableName);
         $worker->work($workLoad, $dbconn, $tableName);

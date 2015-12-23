@@ -1,5 +1,13 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| App migration file
+|--------------------------------------------------------------------------
+|
+| Distributes work among workers
+|
+*/
 $config = require_once '../config/config.php';
 
 $servername = $config['servername'];

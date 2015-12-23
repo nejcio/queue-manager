@@ -104,6 +104,10 @@ class IndexController
         endif;
     }
 
+    /**
+     * Resolves all waiting queues
+     * @return string Done
+     */
     public function resolveAllQueues()
     {
         $servername = $this->app->getAppVariable('servername');
@@ -121,6 +125,6 @@ class IndexController
 
         $dbconn = null;
 
-        die("worker");
+        print_t('Done!');
     }
 }

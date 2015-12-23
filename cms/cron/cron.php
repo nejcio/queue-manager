@@ -1,6 +1,6 @@
 <?php
 
-$url = "fs.dev/queue" ;
+$url = "localhost/queue" ;
 if($url == NULL) return false;
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 5);

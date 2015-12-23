@@ -9,6 +9,14 @@ use App\Models\ReverseText;
 
 class Worker
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Worker
+    |--------------------------------------------------------------------------
+    |
+    | Distributes work among workers
+    |
+    */
     /**
      * Get the queue
      * @param  object $dbconn PDO Object
@@ -27,6 +35,12 @@ class Worker
         return $fetchAllWorkers;
     }
 
+    /**
+     * Destributes work among workers
+     * @param  array $workLoad  All queues from DB
+     * @param  obj $dbconn      PDO object
+     * @param  string $table    DB table name
+     */
     public function work($workLoad, $dbconn, $table)
     {
         $algebra = new Algebra;

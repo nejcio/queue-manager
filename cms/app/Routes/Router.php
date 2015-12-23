@@ -8,7 +8,6 @@ use App\Routes\RouteList;
 
 class Router implements RouterInterface
 {
-
     /*
     |--------------------------------------------------------------------------
     | Main Application Router
@@ -37,25 +36,17 @@ class Router implements RouterInterface
     public function handleIt()
     {
         $requestDetails = $this->prettyfyRequest($_SERVER);
-
         $findController = $this->findController($requestDetails);
-
         if ($findController !== null):
 
             $controller = explode("@", $findController);
-
         $namespace = explode("\\",  __NAMESPACE__);
-
         $objPath = "\\" . $namespace[0]. "\\" . "Controllers\\" . $controller[0];
         $method = $controller[1];
-
         $controllerObject = new $objPath($this->app);
         $controllerObject->$method();
-
         else:
-
             die('404 Page not found, sorry');
-
         endif;
     }
 
@@ -82,7 +73,6 @@ class Router implements RouterInterface
     public function findController($preetyfiedRequest)
     {
         $found = null;
-
         foreach (RouteList::routes() as $route) :
             if ($route["uri"] == $preetyfiedRequest["uri"] && $route["action"] == $preetyfiedRequest["action"]):
                $found = $route["uses"];

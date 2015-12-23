@@ -9,6 +9,15 @@ use App\Queue\QueueFibonacci;
 
 class QueueManager
 {
+    /*
+    |--------------------------------------------------------------------------
+    | QueueManager
+    |--------------------------------------------------------------------------
+    |
+    | Manages the request and adds the queue to DB.
+    |
+    */
+
     /**
      * Adds the request to queue.
      * @param array $request Request

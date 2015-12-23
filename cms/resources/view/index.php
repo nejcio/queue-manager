@@ -15,8 +15,7 @@ $_SESSION['csrf'] =  $csrf_token;
      <!-- CONTENT -->
         <section id="content">
             <div class="result">
-                <div class="success"></div>
-                <div class="error"></div>
+                <a href="/show">SEE RESULTS</a>
             </div>
             <div class="form">
                 <form action="" method="post" class="ajaxcall" accept-charset="utf-8">

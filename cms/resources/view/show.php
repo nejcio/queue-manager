@@ -9,6 +9,7 @@
     <body>
      <!-- CONTENT -->
         <section id="content">
+        <a href="/">BACK</a>
             <class="results">
                 <?php
                 if ($results):
@@ -29,6 +30,7 @@
                      } ;?>
                         <div class="row"><span><b>Date: <?= $result['created_at'];?></b></span></div>
                         <div class="row"><span><b>Type:</b> <?= $type;?></span></div>
+                        <div class="row"><span><b>Worker: <?= $result['worker'];?></b></span></div>
                         <div class="row"><span><b>Input:</b> <?= $result['data'];?></span></div>
                         <div class="row"><span><b>Result:</b> <?= $result['result']?></span></div>
                     <?php if ($result['extra'] != null):?>
@@ -38,7 +40,7 @@
                         ?> <br><?php
                     endforeach;
                 else:
-                    echo 'No Results, wait a minute!';
+                    echo 'No results, wait a minute!';
                 endif;
                 ?>
             </div>

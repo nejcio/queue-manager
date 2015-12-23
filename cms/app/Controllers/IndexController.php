@@ -98,6 +98,7 @@ class IndexController
 
             $dbconn = null;
             echo json_encode(['success' => 'success', 'data'=> ['msg' => 'Request added to queue!']]);
+            header('Location: '.'/');
             return;
         else :
             echo json_encode(['success' => 'failed', 'data'=> ['ERROR' => 'CSRF failed!']]);
@@ -127,5 +128,6 @@ class IndexController
         $dbconn = null;
 
         print_r('Done!');
+        header('Location: '.'/show');
     }
 }

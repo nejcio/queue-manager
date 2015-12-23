@@ -20,6 +20,7 @@
           - php5-mcrypt
           - mysql-server
           - libapache2-mod-auth-mysql
+          - python-mysqldb
           - php5-mysql
       - name: install git
         apt: name=git state=present
@@ -46,10 +47,10 @@
       - name: Create database user
         mysql_user: user=root password='' priv=*.*:ALL state=present
       - name: Create database
-        mysql_db: db=queues state=present
+        mysql_db: db=root state=present
       - name: mod
         shell: sudo a2enmod rewrite
       - name: reload apache
         service: name=apache2 state=reloaded
       - name: mysql migrate
-        shell: ( cd /vagrant/cms/app/mysql/ && php migration.php)
+        shell: ( cd /vagrant/cms/mysql/ && php migration.php)
